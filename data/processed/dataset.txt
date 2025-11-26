@@ -1,0 +1,40 @@
+From ChEMBL (SQLite):
+
+nodes_drug_chembl.csv → chembl_id, name
+
+nodes_target_uniprot.csv → uniprot, target_name
+
+edges_drug_targets_chembl.csv → chembl_id, uniprot, mechanism, action_type
+
+
+
+From SIDER (TSV):
+
+nodes_side_effect_sider.csv → umls_cui, name
+
+edges_drug_sideeffect_stitch.csv → stitch_id, umls_cui, freq_lower, freq_upper (freqs if available)
+
+
+
+From Hetionet
+nodes_compound.csv (DrugBank IDs + names)
+
+nodes_gene.csv (Entrez IDs + symbols)
+
+nodes_disease.csv (DOIDs + names)
+
+nodes_sideeffect.csv (UMLS CUIs + names)
+
+edges_drug_targets.csv (Compound → Gene, “binds”)
+
+edges_drug_treats.csv (Compound → Disease, “treats”)
+
+edges_gene_disease.csv (Gene → Disease, “associates”)
+
+edges_drug_sideeffect.csv (Compound → SideEffect, “causes”)
+
+These correspond to Hetionet’s canonical biomedical relations (CbG, CtD, GaD, CcSE).
+CbG - Compound binds Genes
+CtD - Compound treats Diseases
+GaD - Genes associated with Diseases
+CcSE - Compound cause Side Effect
