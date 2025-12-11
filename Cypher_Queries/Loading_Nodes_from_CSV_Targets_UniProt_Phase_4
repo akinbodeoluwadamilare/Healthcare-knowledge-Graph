@@ -1,0 +1,7 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_target_uniprot_phase4.csv' AS row
+    WITH row
+    WHERE row.uniprot IS NOT NULL AND row.uniprot <> ''
+    MERGE (t:Target { uniprot_id: row.uniprot })
+    SET  t.name = row.target_name
+} IN TRANSACTIONS OF 1000 ROWS;
