@@ -1,0 +1,7 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_gene.csv' AS row
+    WITH row
+    WHERE row.entrez_id IS NOT NULL AND row.entrez_id <> ''
+    MERGE (g:Gene { entrez_id: row.entrez_id })
+    SET  g.symbol = row.symbol
+} IN TRANSACTIONS OF 1000 ROWS;
