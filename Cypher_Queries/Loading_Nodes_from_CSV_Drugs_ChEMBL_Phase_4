@@ -1,0 +1,7 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_drug_chembl_phase4.csv' AS row
+    WITH row
+    WHERE row.chembl_id IS NOT NULL AND row.chembl_id <> ''
+    MERGE (d:Drug { chembl_id: row.chembl_id })
+    SET d.name = coalesce(d.name, row.name)
+} IN TRANSACTIONS OF 1000 ROWS;
