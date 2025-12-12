@@ -1,0 +1,9 @@
+// Two drugs are similar if they bind similar protein targets.
+MATCH (d1:Drug)-[:TARGETS]->(t:Target)<-[:TARGETS]-(d2:Drug)
+WHERE d1 <> d2
+RETURN 
+  d1.chembl_id AS drug1,
+  d2.chembl_id AS drug2,
+  count(*) AS shared_targets
+ORDER BY shared_targets DESC
+LIMIT 20;
