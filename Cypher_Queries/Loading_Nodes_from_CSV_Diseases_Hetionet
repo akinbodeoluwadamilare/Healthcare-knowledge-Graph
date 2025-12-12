@@ -1,0 +1,7 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_disease.csv' AS row
+    WITH row
+    WHERE row.doid IS NOT NULL AND row.doid <> ''
+    MERGE (d:Disease { doid: row.doid })
+    SET  d.name = row.name
+} IN TRANSACTIONS OF 1000 ROWS;
