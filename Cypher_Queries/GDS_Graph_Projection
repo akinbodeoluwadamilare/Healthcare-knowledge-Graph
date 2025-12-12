@@ -1,0 +1,11 @@
+CALL gds.graph.project(
+  'bioKG_core',
+  ['Drug', 'Target', 'Gene', 'Disease', 'SideEffect'],
+  {
+    TARGETS:         { type: 'TARGETS',        orientation: 'NATURAL' },
+    ENCODES:         { type: 'ENCODES',        orientation: 'NATURAL' },
+    ASSOCIATED_WITH: { type: 'ASSOCIATED_WITH',orientation: 'NATURAL' },
+    TREATS:          { type: 'TREATS',         orientation: 'NATURAL' },
+    CAUSES:          { type: 'CAUSES',         orientation: 'NATURAL' }
+  }
+);
