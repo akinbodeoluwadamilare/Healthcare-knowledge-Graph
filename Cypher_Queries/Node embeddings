@@ -1,0 +1,4 @@
+CALL gds.graph.nodeProperties.write(
+  'diseaseGene',
+  ['fastrp_embedding']
+);
