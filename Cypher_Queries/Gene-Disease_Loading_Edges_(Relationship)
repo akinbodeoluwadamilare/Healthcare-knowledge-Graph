@@ -1,0 +1,11 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///edges_gene_disease.csv' AS row
+    WITH row
+    WHERE row.entrez_id IS NOT NULL AND row.entrez_id <> ''
+      AND row.doid      IS NOT NULL AND row.doid      <> ''
+    MATCH (g:Gene    { entrez_id: row.entrez_id })
+    MATCH (d:Disease { doid: row.doid })
+    MERGE (g)-[r:ASSOCIATED_WITH]->(d)
+    SET r.source   = 'Hetionet',
+        r.evidence = row.evidence
+} IN TRANSACTIONS OF 1000 ROWS;
