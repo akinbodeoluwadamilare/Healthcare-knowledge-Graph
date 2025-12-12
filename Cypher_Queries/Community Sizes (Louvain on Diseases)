@@ -1,0 +1,6 @@
+CALL gds.louvain.stream('diseaseGene')
+YIELD nodeId, communityId
+WITH communityId, gds.util.asNode(nodeId) AS n
+WHERE n:Disease
+RETURN communityId, count(*) AS disease_count
+ORDER BY disease_count DESC;
