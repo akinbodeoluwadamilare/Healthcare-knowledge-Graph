@@ -1,0 +1,6 @@
+MATCH (:Drug)-[:CAUSES]->(s:SideEffect)
+RETURN s.umls_cui AS umls_cui,
+       s.name     AS sideeffect_name,
+       count(*)   AS drug_count
+ORDER BY drug_count DESC
+LIMIT 20;
