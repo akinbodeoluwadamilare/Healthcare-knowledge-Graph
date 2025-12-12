@@ -1,0 +1,7 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_side_effect_sider.csv' AS row
+    WITH row
+    WHERE row.umls_cui IS NOT NULL AND row.umls_cui <> ''
+    MERGE (s:SideEffect { umls_cui: row.umls_cui })
+    SET  s.name        = row.term
+} IN TRANSACTIONS OF 1000 ROWS;
