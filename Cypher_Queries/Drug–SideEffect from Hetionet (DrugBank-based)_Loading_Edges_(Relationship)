@@ -1,0 +1,16 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///edges_drug_sideeffect.csv' AS row
+    WITH row
+    WHERE row.drugbank_id IS NOT NULL AND row.drugbank_id <> ''
+      AND row.umls_cui   IS NOT NULL AND row.umls_cui   <> ''
+    MATCH (d:Drug       { drugbank_id: row.drugbank_id })
+    MATCH (s:SideEffect { umls_cui: row.umls_cui })
+    MERGE (d)-[r:CAUSES]->(s)
+    SET r.source   = 
+        CASE 
+          WHEN r.source IS NULL THEN 'Hetionet'
+          WHEN NOT r.source CONTAINS 'Hetionet' THEN r.source + ';Hetionet'
+          ELSE r.source
+        END,
+        r.evidence = row.evidence
+} IN TRANSACTIONS OF 1000 ROWS;
