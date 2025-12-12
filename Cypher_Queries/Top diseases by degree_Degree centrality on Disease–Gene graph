@@ -1,0 +1,10 @@
+// Top-20 Degree Diseases
+CALL gds.degree.stream('diseaseGene')
+YIELD nodeId, score
+WITH nodeId, score
+WHERE gds.util.asNode(nodeId):Disease
+RETURN gds.util.asNode(nodeId).doid AS doid,
+       gds.util.asNode(nodeId).name AS disease_name,
+       score AS degree
+ORDER BY degree DESC
+LIMIT 20;
