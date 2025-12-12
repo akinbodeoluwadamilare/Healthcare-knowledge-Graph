@@ -1,0 +1,2 @@
+MATCH (c:Compound)-[:SAME_AS]->(d:Drug)
+RETURN count(*) AS compound_drug_pairs;
