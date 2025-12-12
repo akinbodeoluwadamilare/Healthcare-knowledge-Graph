@@ -1,0 +1,8 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///nodes_compound.csv' AS row
+    WITH row
+    WHERE row.drugbank_id IS NOT NULL AND row.drugbank_id <> ''
+    MERGE (c:Compound { drugbank_id: row.drugbank_id })
+    SET  c.name   = row.name,
+         c.source = 'Hetionet'
+} IN TRANSACTIONS OF 1000 ROWS;
