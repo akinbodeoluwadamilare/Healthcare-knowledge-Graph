@@ -1,0 +1,6 @@
+MATCH (d1:Drug)-[:CAUSES]->(s:SideEffect)<-[:CAUSES]-(d2:Drug)
+WHERE d1 <> d2
+RETURN s.name AS side_effect,
+       collect(DISTINCT d1.chembl_id)[0..5] AS drugs_1,
+       collect(DISTINCT d2.chembl_id)[0..5] AS drugs_2
+LIMIT 20;
