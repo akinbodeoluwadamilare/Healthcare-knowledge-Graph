@@ -1,0 +1,9 @@
+// Two drugs are similar if they cause similar phenotypic profile.
+MATCH (d1:Drug)-[:CAUSES]->(s:SideEffect)<-[:CAUSES]-(d2:Drug)
+WHERE d1 <> d2
+RETURN 
+  d1.chembl_id AS drug1,
+  d2.chembl_id AS drug2,
+  count(*) AS shared_sideeffects
+ORDER BY shared_sideeffects DESC
+LIMIT 20;
