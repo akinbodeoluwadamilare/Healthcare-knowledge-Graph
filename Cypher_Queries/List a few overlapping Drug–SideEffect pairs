@@ -1,0 +1,9 @@
+MATCH (d:Drug)-[r:CAUSES]->(s:SideEffect)
+WHERE r.source CONTAINS 'SIDER'
+  AND r.source CONTAINS 'Hetionet'
+RETURN d.chembl_id AS chembl_id,
+       d.name      AS drug_name,
+       s.umls_cui  AS umls_cui,
+       s.name      AS side_effect,
+       r.source    AS provenance
+LIMIT 20;
