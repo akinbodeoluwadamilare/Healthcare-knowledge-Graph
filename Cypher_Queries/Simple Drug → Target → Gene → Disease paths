@@ -1,0 +1,6 @@
+MATCH p = (d:Drug { chembl_id: 'CHEMBL14' })  // example: CHEMBL25
+          -[:TARGETS]->(:Target)
+          -[:ENCODES]->(:Gene)
+          -[:ASSOCIATED_WITH]->(:Disease)
+RETURN p
+LIMIT 10;
