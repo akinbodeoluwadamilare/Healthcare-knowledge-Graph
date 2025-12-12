@@ -1,0 +1,10 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///sider_stitch_to_chembl_phase4.csv' AS row
+    WITH row
+    WHERE row.stitch_id IS NOT NULL AND row.stitch_id <> ''
+      AND row.chembl_id IS NOT NULL AND row.chembl_id <> ''
+    MATCH (d:Drug { chembl_id: row.chembl_id })
+    MERGE (s:Stitch { stitch_id: row.stitch_id })
+    SET  s.pubchem_cid = row.pubchem_cid
+    MERGE (s)-[:MAPS_TO]->(d)
+} IN TRANSACTIONS OF 1000 ROWS;
