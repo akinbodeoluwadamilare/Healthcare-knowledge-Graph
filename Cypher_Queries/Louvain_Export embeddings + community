@@ -1,0 +1,8 @@
+// Export embeddings + community
+// First, store Louvain community on the Disease nodes:
+CALL gds.louvain.write(
+  'diseaseGene',
+  {
+    writeProperty: 'communityId'
+  }
+);
