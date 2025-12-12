@@ -1,0 +1,12 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///edges_drug_targets_chembl_phase4.csv' AS row
+    WITH row
+    WHERE row.chembl_id IS NOT NULL AND row.chembl_id <> ''
+      AND row.uniprot   IS NOT NULL AND row.uniprot   <> ''
+    MATCH (d:Drug   { chembl_id: row.chembl_id })
+    MATCH (t:Target { uniprot_id: row.uniprot })
+    MERGE (d)-[r:TARGETS]->(t)
+    SET r.mechanism   = row.mechanism,
+        r.action_type = row.action_type,
+        r.source      = 'ChEMBL'
+} IN TRANSACTIONS OF 1000 ROWS;
