@@ -1,0 +1,4 @@
+MATCH p = (d1:Drug)-[:TARGETS]->(:Target)-[:ENCODES]->(g:Gene)-[:ASSOCIATED_WITH]->(d:Disease)
+WHERE d.name = 'breast cancer'
+RETURN p
+LIMIT 100;
