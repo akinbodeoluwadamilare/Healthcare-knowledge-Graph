@@ -1,0 +1,9 @@
+MATCH (d1:Drug)-[:TARGETS]->(:Target)-[:ENCODES]->(g:Gene)-[:ASSOCIATED_WITH]->(d:Disease)
+WHERE d.name = 'breast cancer'
+RETURN
+  d1.chembl_id AS drug_id,
+  d1.name      AS drug_name,
+  g.entrez_id  AS gene_id,
+  g.symbol     AS gene_symbol,
+  d.doid       AS disease_id,
+  d.name       AS disease_name;
