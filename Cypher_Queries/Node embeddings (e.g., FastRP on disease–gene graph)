@@ -1,0 +1,7 @@
+CALL gds.fastRP.mutate(
+  'diseaseGene',
+  {
+    mutateProperty: 'fastrp_embedding',
+    embeddingDimension: 64
+  }
+);
