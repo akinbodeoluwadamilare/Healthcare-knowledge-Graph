@@ -1,0 +1,13 @@
+// For a more robust similarity metric:
+MATCH (d1:Drug)-[:TARGETS]->(t:Target)<-[:TARGETS]-(d2:Drug)
+WITH d1, d2, count(*) AS target_overlap
+MATCH (d1)-[:CAUSES]->(s:SideEffect)<-[:CAUSES]-(d2)
+WITH d1, d2, target_overlap, count(*) AS se_overlap
+RETURN
+  d1.chembl_id AS drug1,
+  d2.chembl_id AS drug2,
+  target_overlap,
+  se_overlap,
+  (target_overlap + se_overlap) AS similarity_score
+ORDER BY similarity_score DESC
+LIMIT 20;
