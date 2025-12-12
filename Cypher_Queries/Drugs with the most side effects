@@ -1,0 +1,6 @@
+MATCH (d:Drug)-[:CAUSES]->(:SideEffect)
+RETURN d.chembl_id AS chembl_id,
+       d.name      AS drug_name,
+       count(*)    AS sideeffect_count
+ORDER BY sideeffect_count DESC
+LIMIT 20;
