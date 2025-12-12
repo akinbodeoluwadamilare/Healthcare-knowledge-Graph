@@ -1,0 +1,2 @@
+MATCH p = (d:Drug)-[:TARGETS]->(:Target)-[:ENCODES]->(:Gene)-[:ASSOCIATED_WITH]->(:Disease)
+RETURN p LIMIT 5;
