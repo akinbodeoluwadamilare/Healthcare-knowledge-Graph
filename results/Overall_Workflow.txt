@@ -1,0 +1,9 @@
+Run your Cypher analytics in Neo4j (degree, betweenness, Louvain, etc.).
+
+Export the numeric results to CSV (either from Browser or cypher-shell).
+
+Load CSVs in Python (pandas).
+
+Make plots with matplotlib (bar charts, histograms, etc.).
+
+Save as high-resolution PNG/PDF and include in LaTeX.
