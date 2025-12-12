@@ -1,0 +1,4 @@
+MATCH (d:Drug)-[r:CAUSES]->(s:SideEffect)
+WHERE r.source CONTAINS 'SIDER'
+  AND r.source CONTAINS 'Hetionet'
+RETURN count(*) AS overlapping_edges;
