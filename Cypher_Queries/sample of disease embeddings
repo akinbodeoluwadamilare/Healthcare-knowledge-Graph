@@ -1,0 +1,8 @@
+MATCH (d:Disease)
+WHERE d.fastrp_embedding IS NOT NULL
+RETURN
+  d.doid             AS doid,
+  d.name             AS disease_name,
+  d.communityId      AS community,
+  d.fastrp_embedding AS embedding
+LIMIT 5000;
