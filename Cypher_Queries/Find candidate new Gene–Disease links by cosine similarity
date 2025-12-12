@@ -1,0 +1,15 @@
+// Example: find candidate new Gene–Disease links by cosine similarity
+MATCH (g:Gene), (d:Disease)
+WHERE g.fastrp_embedding IS NOT NULL
+  AND d.fastrp_embedding IS NOT NULL
+  AND NOT (g)-[:ASSOCIATED_WITH]->(d)
+WITH g, d,
+     gds.similarity.cosine(g.fastrp_embedding, d.fastrp_embedding) AS sim
+WHERE sim > 0.8
+RETURN g.entrez_id AS gene,
+       g.symbol AS gene_symbol,
+       d.doid AS disease_id,
+       d.name AS disease_name,
+       sim
+ORDER BY sim DESC
+LIMIT 50;
