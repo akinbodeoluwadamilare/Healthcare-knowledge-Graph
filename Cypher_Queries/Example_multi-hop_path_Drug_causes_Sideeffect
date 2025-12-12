@@ -1,0 +1,2 @@
+MATCH p = (d:Drug)-[:CAUSES]->(:SideEffect)
+RETURN p LIMIT 5;
