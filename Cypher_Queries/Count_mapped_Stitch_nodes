@@ -1,0 +1,2 @@
+MATCH (s:Stitch)-[:MAPS_TO]->(d:Drug)
+RETURN count(s) AS stitch_nodes;
