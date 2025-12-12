@@ -1,0 +1,7 @@
+CALL gds.graph.project(
+  'diseaseGene',
+  ['Gene', 'Disease'],
+  {
+    ASSOCIATED_WITH: { type: 'ASSOCIATED_WITH', orientation: 'UNDIRECTED' }
+  }
+);
