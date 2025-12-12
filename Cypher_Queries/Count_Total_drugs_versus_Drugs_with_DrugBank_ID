@@ -1,0 +1,3 @@
+MATCH (d:Drug)
+RETURN count(d) AS total_drugs,
+       count(d.drugbank_id) AS drugs_with_drugbank;
