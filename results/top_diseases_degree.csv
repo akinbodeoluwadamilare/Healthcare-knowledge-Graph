@@ -1,0 +1,21 @@
+doid,disease_name,degree
+DOID:2531,hematologic cancer,550.0
+DOID:1612,breast cancer,540.0
+DOID:10283,prostate cancer,535.0
+DOID:10763,hypertension,496.0
+DOID:3393,coronary artery disease,478.0
+DOID:2986,IgA glomerulonephritis,448.0
+DOID:1826,epilepsy syndrome,399.0
+DOID:9970,obesity,373.0
+DOID:1909,melanoma,342.0
+DOID:10534,stomach cancer,298.0
+DOID:9352,type 2 diabetes mellitus,275.0
+DOID:7148,rheumatoid arthritis,267.0
+DOID:2355,anemia,262.0
+DOID:12849,autistic disorder,253.0
+DOID:1324,lung cancer,252.0
+DOID:5419,schizophrenia,235.0
+DOID:2841,asthma,222.0
+DOID:263,kidney cancer,213.0
+DOID:11612,polycystic ovary syndrome,200.0
+DOID:10652,Alzheimer's disease,196.0
