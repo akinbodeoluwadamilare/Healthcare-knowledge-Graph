@@ -1,0 +1,9 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///chembl_to_drugbank.csv' AS row
+    WITH row
+    WHERE row.chembl_id   IS NOT NULL AND row.chembl_id   <> ''
+      AND row.drugbank_id IS NOT NULL AND row.drugbank_id <> ''
+    MATCH (d:Drug { chembl_id: row.chembl_id })
+    SET d.drugbank_id = row.drugbank_id,
+        d.name        = coalesce(d.name, row.name)
+} IN TRANSACTIONS OF 1000 ROWS;
