@@ -1,0 +1,19 @@
+CALL () {
+    LOAD CSV WITH HEADERS FROM 'file:///edges_drug_sideeffect_stitch.csv' AS se
+    WITH se
+    WHERE se.stitch_id IS NOT NULL AND se.stitch_id <> ''
+      AND se.umls_cui  IS NOT NULL AND se.umls_cui  <> ''
+    MATCH (s:Stitch { stitch_id: se.stitch_id })-[:MAPS_TO]->(d:Drug)
+    MATCH (side:SideEffect { umls_cui: se.umls_cui })
+    MERGE (d)-[r:CAUSES]->(side)
+    SET r.source = 
+        CASE 
+            WHEN r.source IS NULL THEN 'SIDER'
+            WHEN NOT r.source CONTAINS 'SIDER' THEN r.source + ';SIDER'
+            ELSE r.source
+        END,
+        r.sider_stitch_id = se.stitch_id
+        // uncomment if frequencies are later populated:
+        // r.freq_lower = CASE WHEN se.frequency_lower = '' THEN r.freq_lower ELSE toFloat(se.frequency_lower) END,
+        // r.freq_upper = CASE WHEN se.frequency_upper = '' THEN r.freq_upper ELSE toFloat(se.frequency_upper) END
+} IN TRANSACTIONS OF 1000 ROWS;
