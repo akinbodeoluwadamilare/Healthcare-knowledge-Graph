@@ -1,4 +1,4 @@
-Run your Cypher analytics in Neo4j (degree, betweenness, Louvain, etc.).
+Run our Cypher analytics in Neo4j (degree, betweenness, Louvain, etc.).
 
 Export the numeric results to CSV (either from Browser or cypher-shell).
 
