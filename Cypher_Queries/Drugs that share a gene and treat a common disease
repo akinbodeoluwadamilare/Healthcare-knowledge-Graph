@@ -1,0 +1,10 @@
+MATCH (d1:Drug)-[:TARGETS]->(:Target)-[:ENCODES]->(g:Gene)
+      -[:ASSOCIATED_WITH]->(di:Disease)
+MATCH (d2:Drug)-[:TARGETS]->(:Target)-[:ENCODES]->(g)
+      -[:ASSOCIATED_WITH]->(di)
+WHERE d1 <> d2
+RETURN di.name AS disease,
+       g.symbol AS gene,
+       collect(DISTINCT d1.chembl_id)[0..5] AS drugs_1,
+       collect(DISTINCT d2.chembl_id)[0..5] AS drugs_2
+LIMIT 20;
